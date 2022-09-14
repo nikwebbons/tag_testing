@@ -1,0 +1,14 @@
+resources:
+  - name: tag-git
+    type: git
+    source:
+      uri: https://github.com/nikwebbons/tag_testing
+      tag_filter: "*"
+
+jobs:
+  - name: terraform-plan
+    plan:
+      - get: tag-git
+        trigger: true
+      - task: linting
+        file: tag-git/ci/list.yml
